@@ -1,6 +1,5 @@
 function NoteCard({ title, body }) {
 
-    
   return (
     <div>
       <h3 className="pr-8 text-[22px] font-normal break-words">{title}</h3>
