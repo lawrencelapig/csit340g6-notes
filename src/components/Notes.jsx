@@ -20,10 +20,10 @@ function Notes() {
     return saved ? JSON.parse(saved) : startingNotes;
   });
   const [search, setSearch] = useState("");
-  const [form, setForm] = useState({
-    body: "",
-    title: "",
-  });
+  const [form, setForm] = useState(() => {
+  const saved = localStorage.getItem('draft')
+  return saved ? JSON.parse(saved) : { title: '', body: '' }
+})
   const titleRef = useRef(null)
 
   useEffect(() => {
