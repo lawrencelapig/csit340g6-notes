@@ -1,5 +1,5 @@
 import NoteCard from "./NoteCard.jsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Notes() {
   const [notes, setNotes] = useState([]);
@@ -8,6 +8,11 @@ function Notes() {
     body: "",
     title: "",
   });
+  
+  useEffect(() => {
+    localStorage.setItem("notes", JSON.stringify(notes));
+  }, [notes]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm({
@@ -28,12 +33,12 @@ function Notes() {
   };
 
   const handleDelete = (id) => {
-    setNotes(notes.filter((note) => note.id !== id) )
-  }
-  
-  const searchNotes = notes.filter((note) => 
-    note.title.toLowerCase().includes(search.toLowerCase())
-  )
+    setNotes(notes.filter((note) => note.id !== id));
+  };
+
+  const searchNotes = notes.filter((note) =>
+    note.title.toLowerCase().includes(search.toLowerCase()),
+  );
 
   return (
     <div className="grid min-h-screen grid-cols-[420px_1fr]">
@@ -100,8 +105,8 @@ function Notes() {
           ))}
         </ul>
         {searchNotes.length === 0 && (
-        <p className="text-lg text-[#949494]">No notes found</p>
-        )}  
+          <p className="text-lg text-[#949494]">No notes found</p>
+        )}
       </section>
     </div>
   );
